@@ -2,6 +2,8 @@ import { useState,  useRef } from 'react';
 import './Register.css'
 import Photo from '../assets/images/Login-Photo.png'
 import { Link } from 'react-router';
+import { AuthRegister } from '../features/auth/AuthRegister'
+
 
 const RegisterForm = () => {
   const [form, setForm] = useState({
@@ -10,7 +12,7 @@ const RegisterForm = () => {
     password: '',
     confirmPassword: '',
   });
-
+  
   const [errors, setErrors] = useState({});
   const [avatar, setAvatar] = useState(null);
   const avatarInputRef = useRef(null);
@@ -47,21 +49,36 @@ const RegisterForm = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   // form submition
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      alert('Form submitted successfully!');
-      
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (validate()) {
+    // form data
+    const formData = new FormData();
+    formData.append('username', form.Username);
+    formData.append('email', form.email);
+    formData.append('password', form.password);
+    formData.append('password_confirmation', form.confirmPassword); 
+    // Append avatar only if uploaded
+    if (avatarInputRef.current?.files[0]) {
+      formData.append('avatar', avatarInputRef.current.files[0]);
     }
-  };
+
+    try {
+      const result = await AuthRegister(formData);
+      console.log('Registration successful:', result);
+      alert('Registered successfully!');
+    } catch (err) {
+      console.error('Registration failed:', err.response?.data || err.message);
+    }
+  }
+};
 //for avatar upload
   const handleUploadAvatar = (e) => {
     const file = e.target.files[0];
     if (file) {
       const url = URL.createObjectURL(file); 
-      
       setAvatar(url);
-    
     }
   };
 
@@ -70,16 +87,18 @@ const RegisterForm = () => {
       URL.revokeObjectURL(avatar);
       setAvatar(null);
       if (avatarInputRef.current) {
-        avatarInputRef.current.value = ''; // Reset input so same file can be uploaded again
+        avatarInputRef.current.value = ''; // 
       }
     }
   };
 
-console.log(avatar)
+  
+
+
   return (
     <div class='Register-Main'>
     <img class='Login-Image' src={Photo} />
-    <form onSubmit={handleSubmit} class='Register-Form-Container'>
+    <form  onSubmit={handleSubmit}class='Register-Form-Container'>
       <h2>Registration</h2>
 
       <div class='Register-Fields-Container'>
