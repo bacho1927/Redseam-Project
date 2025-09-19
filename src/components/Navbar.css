@@ -1,0 +1,18 @@
+.Navbar-Main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+     padding: 1rem 5rem;
+}
+
+.Navbar-Login-Button{
+    color:black;
+    text-decoration: none;
+    padding: 1rem;
+}
+
+.Navbar-Login-Container{
+    display: flex;
+    align-items: center;
+
+}

@@ -1,0 +1,59 @@
+.Login-Main{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.Login-Image{
+
+  object-fit: cover; 
+  display: block;
+}
+.Login-Form-Container{
+    padding: 8rem; 
+    width: 100%;
+    
+}
+.Login-Fields-Container{
+    margin-top: 50px;
+    display: flex;
+  flex-direction: column;
+  gap: 1rem; 
+
+}
+
+.Login-Fields-Input{
+    width: 100%; 
+    max-width: 500px;   
+   font-family: 'Poppins', sans-serif;
+}
+.Login-Button{
+    margin-top:30px;
+    width: 100%; 
+     max-width: 525px;
+     padding: 10px;
+     color:white;
+     background-color: #FF4000;
+     border:none;
+     border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 2px solid #e4e2e2;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  
+}
+.Login-P{
+    text-align: center;
+    width: 100%; 
+     max-width: 525px;
+}
+.Login-Register{
+   text-decoration: none;
+   color:#FF4000;
+   text-align: center;
+}
