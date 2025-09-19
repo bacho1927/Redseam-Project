@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState,  useRef } from 'react';
 import './Register.css'
 import Photo from '../assets/images/Login-Photo.png'
 import { Link } from 'react-router';
