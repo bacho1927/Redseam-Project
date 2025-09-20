@@ -6,7 +6,7 @@ const API_URL = 'https://api.redseam.redberryinternship.ge/api';
 export const AuthRegister = async (formData) => {
   const response = await axios.post(`${API_URL}/register`, formData,
      {headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'Accept': 'application/json',
         
       },

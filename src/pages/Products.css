@@ -1,0 +1,46 @@
+.Products-Page-Container{
+    padding: 1rem 5rem;
+}
+
+.Products-Header-Container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+}
+
+.Filter-Sort-Container{
+    display: flex;
+    gap:3rem;
+}
+
+.Filter{
+    display: flex;
+    align-items: center;
+    gap:1rem
+}
+
+.Sort{
+    display: flex;
+    align-items: center;
+    gap:0.5rem
+}
+
+.Product-List-Container{
+    display: grid;
+    grid-template-rows: repeat(4, 1fr); /* 4 rows */
+    grid-template-columns: repeat(4, 1fr); /* 3 columns */
+    gap: 50px;
+    
+}
+.Product-Cover {
+    
+   
+    display: flex;
+    border: 1px solid #ddd; /* optional */
+   
+}
+.Products-Image{
+    width: 250px;
+    margin: auto;
+    display: block;
+}

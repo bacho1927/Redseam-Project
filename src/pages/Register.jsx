@@ -60,10 +60,11 @@ const RegisterForm = () => {
     formData.append('password', form.password);
     formData.append('password_confirmation', form.confirmPassword); 
     // Append avatar only if uploaded
+
     if (avatarInputRef.current?.files[0]) {
       formData.append('avatar', avatarInputRef.current.files[0]);
     }
-
+console.log(formData)
     try {
       const result = await AuthRegister(formData);
       console.log('Registration successful:', result);
@@ -76,6 +77,7 @@ const RegisterForm = () => {
 //for avatar upload
   const handleUploadAvatar = (e) => {
     const file = e.target.files[0];
+    console.log(e)
     if (file) {
       const url = URL.createObjectURL(file); 
       setAvatar(url);
@@ -106,7 +108,7 @@ const RegisterForm = () => {
           <img src={avatar}  style={{ width: 100, height: 100, borderRadius: '50%' }} />
           <label htmlFor="avatarInput" class="Upload-Label">Upload new</label>
           <label onClick={handleRemoveAvatar} class="Remove-Label">Remove</label>
-          <input type="file" id="avatarInput" name="avatar" accept="image/*" hidden onChange={handleUploadAvatar}></input>
+          <input ref={avatarInputRef} type="file" id="avatarInput" name="avatar" accept="image/*" hidden onChange={handleUploadAvatar}></input>
         </div>
         <input
           type="text"
