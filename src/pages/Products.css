@@ -34,13 +34,23 @@
 }
 .Product-Cover {
     
-   
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
-    border: 1px solid #ddd; /* optional */
+    border: 1px solid #ddd; 
    
 }
 .Products-Image{
     width: 250px;
     margin: auto;
     display: block;
+}
+
+.Product-Link{
+    text-decoration: none;
+    color: black;
+    
+}
+
+.Product-Link:hover{
+    color: rgb(82, 79, 79);
 }
