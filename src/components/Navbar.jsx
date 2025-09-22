@@ -2,14 +2,19 @@ import './Navbar.css'
 import { useAuth } from '../features/auth/AuthContext';
 import { IoPerson } from "react-icons/io5";
 import { Link } from 'react-router-dom';
-
+import navBarLogo from '../assets/images/Vector.png'
 
 const Navbar = () => {
   const { user, isLoggedIn, logout } = useAuth();
 
   return (
     <nav class='Navbar-Main'>
+      <div class='Navbar-Logo-Container'>
+        <Link to="/">
+      <img class='Navbar-Logo' src={navBarLogo} alt="Logo" />
+      </Link>
       <h1>RedSeam Clothing</h1>
+      </div>
       {isLoggedIn ? (
         <>
           <span>Welcome, {user.name}</span>

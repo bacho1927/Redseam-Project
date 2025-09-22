@@ -58,7 +58,10 @@ function ProductDetail() {
 console.log(product)
 
     return (
+      <>
+      <p style={{padding:'1rem 5rem'}}>Listing/Product</p>
         <div className="Product-Detail-Container">
+          
             <div class="Product-Detail-Main-Image-Container">
               <div class="Product-Small-Images-Container">
                 {product?.images?.map((image,index) =>(
@@ -135,6 +138,7 @@ console.log(product)
              </div>
              </div>
         </div>
+        </>
     )
 }
 

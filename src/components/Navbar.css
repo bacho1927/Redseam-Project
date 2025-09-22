@@ -16,3 +16,14 @@
     align-items: center;
 
 }
+
+.Navbar-Logo-Container{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Navbar-Logo{
+    width: 2rem;
+    margin-top: 10px;
+}

@@ -1,7 +1,7 @@
 import { useState,  useRef } from 'react';
 import './Register.css'
 import Photo from '../assets/images/Login-Photo.png'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthRegister } from '../features/auth/AuthRegister'
 
 
@@ -12,7 +12,7 @@ const RegisterForm = () => {
     password: '',
     confirmPassword: '',
   });
-  
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [avatar, setAvatar] = useState(null);
   const avatarInputRef = useRef(null);
@@ -68,7 +68,8 @@ console.log(formData)
     try {
       const result = await AuthRegister(formData);
       console.log('Registration successful:', result);
-      alert('Registered successfully!');
+      
+     navigate('/')
     } catch (err) {
       console.error('Registration failed:', err.response?.data || err.message);
     }

@@ -1,0 +1,46 @@
+.Ordered-Main-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh; 
+    gap:40px
+}
+
+.Ordered-Check-Logo-Background{
+    height: 8rem;
+    width: 8rem;
+    background: #e9e8e8;
+    border-radius: 50%;
+    position: relative;
+}
+
+.Ordered-Check-Logo{
+    position: absolute;
+    color:green;
+    top:25%;
+    left:25%;
+    font-size: 70px;
+}
+
+.Ordered-Congrats{
+    font-size: 60px;
+    margin-top: 20px;
+}
+
+.Ordered-text{
+    font-size: 20px;
+}
+
+.Ordered-Button{
+    text-decoration: none;
+    width: 20rem; 
+     text-align: center;
+     padding: 15px;
+     color:white;
+     background-color: #FF4000;
+     border:none;
+     border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 50px;
+}
