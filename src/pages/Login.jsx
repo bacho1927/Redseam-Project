@@ -1,60 +1,76 @@
-import Photo from '../assets/images/Login-Photo.png'
-import './Login.css'
-import { Link } from 'react-router'
-import {AuthLogin} from '../features/auth/AuthLogin'
+import Photo from '../assets/images/Login-Photo.png';
+import './Login.css';
+import { Link, useNavigate } from 'react-router-dom'; // Correct the import
+import { AuthLogin } from '../features/auth/AuthLogin';
 import { useState } from 'react';
-
+import { useAuth } from '../features/auth/AuthContext'; // 1. Import useAuth
 
 function Login() {
-     const [form, setForm] = useState({
+  const [form, setForm] = useState({
     email: '',
     password: '',
   });
 
-const handleChange = (e) => {
+  const navigate = useNavigate(); 
+  const { login } = useAuth();    // 3. Get the login function from your context
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-    
   };
 
-
-const handleLogin =async (e)=>{
-
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!form.email || !form.password) {
-    alert('Email and password are required.');
-    console.log(form)
-    return;
-  }
+      alert('Email and password are required.');
+      return;
+    }
 
     try {
-    const result = await AuthLogin(form);  
-    console.log('Login successful:', result);
-    alert('Logged in successfully!');
-    
-  } catch (err) {
-    console.error('Login failed:', err.response?.data || err.message);
-    alert('Login failed!');
-  }
+      
+      const userData = await AuthLogin(form);
+      
+      // Updates  global state with the user data
+      login(userData); 
+      
+      //  Navigate to the main page
+      navigate('/'); 
+      
+    } catch (err) {
+      console.error('Login failed:', err.response?.data || err.message);
+      alert('Login failed!');
     }
-    
-    return (
-        <div class='Login-Main'>
-            <img class='Login-Image' src={Photo} />
-            <div class='Login-Form-Container'>
-                <h1>Log in</h1>
-                <div class='Login-Fields-Container'>
-                    <input type='text' name='email' placeholder='Email ' class='Login-Fields-Input' value={form.email}
-                    onChange={handleChange}></input>
-                    <input type='text' name='password' placeholder='Password' class='Login-Fields-Input' value={form.password}
-                    onChange={handleChange}></input>
-                    <button class='Login-Button' onClick={handleLogin}>Log in</button>
-                </div>
-                <p class='Login-P'>Not a member? <Link to="/register" class='Login-Register'>Register</Link ></p>
-            </div>
+  };
+
+  return (
+    <div className='Login-Main'>
+      <img className='Login-Image' src={Photo} alt="Decorative" />
+      <div className='Login-Form-Container'>
+        <h1>Log in</h1>
+        <div className='Login-Fields-Container'>
+          <input 
+            type='email' // Use type='email' for better validation
+            name='email' 
+            placeholder='Email' 
+            className='Login-Fields-Input' 
+            value={form.email}
+            onChange={handleChange} 
+          />
+          <input 
+            type='password' // Use type='password' to hide characters
+            name='password' 
+            placeholder='Password' 
+            className='Login-Fields-Input' 
+            value={form.password}
+            onChange={handleChange} 
+          />
+          <button className='Login-Button' onClick={handleLogin}>Log in</button>
         </div>
-    )
+        <p className='Login-P'>Not a member? <Link to="/register" className='Login-Register'>Register</Link></p>
+      </div>
+    </div>
+  );
 }
 
-export default Login
+export default Login;

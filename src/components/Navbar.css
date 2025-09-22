@@ -27,3 +27,17 @@
     width: 2rem;
     margin-top: 10px;
 }
+
+.Navbar-User-Logo{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+
+.Navbar-User-Logo-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+
+}

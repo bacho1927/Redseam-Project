@@ -17,7 +17,7 @@ const RegisterForm = () => {
   const [avatar, setAvatar] = useState(null);
   const avatarInputRef = useRef(null);
   
-  const existingUsername = [ 'admin', 'testuser'];
+  const existingUsername = [ 'admin'];
 
   const validate = () => {
 
@@ -59,8 +59,8 @@ const RegisterForm = () => {
     formData.append('email', form.email);
     formData.append('password', form.password);
     formData.append('password_confirmation', form.confirmPassword); 
-    // Append avatar only if uploaded
 
+    // Append avatar 
     if (avatarInputRef.current?.files[0]) {
       formData.append('avatar', avatarInputRef.current.files[0]);
     }
