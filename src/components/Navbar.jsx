@@ -3,12 +3,15 @@ import { useAuth } from '../features/auth/AuthContext';
 import { IoPerson } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import navBarLogo from '../assets/images/Vector.png'
-import { FaShoppingCart } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaCartShopping,FaAngleDown } from "react-icons/fa6";
+import { useContext } from 'react';
+import { AppContext } from '../context/AppContext';
+
+
 
 const Navbar = () => {
   const { user, isLoggedIn } = useAuth();
-
+const {  openCart } = useContext(AppContext);
 
   return (
     <nav class='Navbar-Main'>
@@ -21,7 +24,7 @@ const Navbar = () => {
       {isLoggedIn ? (
         <>
         <div class="Navbar-User-Logo-Container">
-        <FaShoppingCart style={{fontSize:'25px',marginRight:'10px'}}/>
+        <FaCartShopping  class="Navbar-Shopping-Cart" onClick={openCart}/>
           <img src={user?.user?.avatar} class="Navbar-User-Logo"/>
           <FaAngleDown />
           </div>

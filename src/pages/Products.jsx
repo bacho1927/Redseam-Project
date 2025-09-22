@@ -27,7 +27,7 @@ console.log(products)
     return (
         <div class='Products-Page-Container'>
             <div class='Products-Header-Container'>
-                <h1>Products</h1>
+                <h1 >Products</h1>
                 <form class='Filter-Sort-Container'>
                     <div class='Filter'>
                         <FaFilter /><p>Filter</p>

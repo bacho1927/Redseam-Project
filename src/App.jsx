@@ -8,6 +8,7 @@ import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail'; 
 import OrderPlaced from './pages/OrderPlaced';
 import Layout from './components/Layout';
+import ShoppingCartModal from './components/ShoppingCartModal';
 
 function App() {
   
@@ -23,7 +24,7 @@ function App() {
             <Route path='/order-placed' element={<OrderPlaced />}/>
           </Routes>
         </Layout>
-        
+        <ShoppingCartModal  />
       </Router>
     </AppProvider>
   );

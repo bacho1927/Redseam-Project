@@ -1,0 +1,83 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex;
+  justify-content: flex-end; /* Pushes the modal to the right */
+  align-items: center; /* Vertically centers if the modal wasn't full height */
+  z-index: 1000; /* Ensures the modal is on top of other content */
+}
+
+.shopping-cart-modal {
+  background-color: white;
+  width: 30%; /* 30% of the viewport width */
+  height: 100vh; /* 100% of the viewport height */
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow on the left */
+  display: flex;
+  flex-direction: column; /* Stacks header, body, footer vertically */
+}
+
+.modal-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: #555;
+  padding: 0 10px;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.modal-body {
+  flex-grow: 1; /* Allows the body to take up available space */
+  padding: 20px;
+  overflow-y: auto; /* Adds scroll if content overflows */
+}
+
+.modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-footer button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.modal-footer button:hover {
+  background-color: #e0e0e0;
+}
+
+.modal-footer .checkout-button {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.modal-footer .checkout-button:hover {
+  background-color: #0056b3;
+}
