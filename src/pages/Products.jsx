@@ -23,7 +23,7 @@ function Products() {
 
     loadProducts();
   }, []);
-console.log(products)
+
     return (
         <div class='Products-Page-Container'>
             <div class='Products-Header-Container'>

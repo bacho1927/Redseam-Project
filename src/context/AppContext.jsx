@@ -1,26 +1,65 @@
-import React, { createContext, useState } from 'react';
-import ShoppingCartModal from '../components/ShoppingCartModal'; // Make sure the path is correct
+import { createContext, useState } from "react";
 
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  
   const [user, setUser] = useState(null);
-
-  
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
-
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
-  const addToCart = (product) => {
+  
+  //this code adds items to cart
+  const addToCart = (productToAdd) => {
+    setCartItems(prevItems => {
+
+      //if products matches eachother, only increase quantity 
+      const existingItem = prevItems.find(item => item.id === productToAdd.id);
+
+      if (existingItem) {
+        
+        return prevItems.map(item =>
+          item.id === productToAdd.id
+            ? { ...item, quantity: item.quantity + productToAdd.quantity }
+            : item
+        );
+      }
+      return [...prevItems, productToAdd];
+    });
     
-    setCartItems(prevItems => [...prevItems, product]);
-    console.log(`${product.name} added to cart!`);
   };
 
-  
+  //this code is to increase quantity of item in cart
+const increaseQuantity = (itemId) => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === itemId
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+    );
+  };
+//this code is to decrease quantity of item in cart
+  const decreaseQuantity = (itemId) => {
+    setCartItems(prevItems => {
+      const existingItem = prevItems.find(item => item.id === itemId);
+
+      
+      if (existingItem?.quantity === 1) {
+        return prevItems.filter(item => item.id !== itemId);
+      }
+      
+      
+      return prevItems.map(item =>
+        item.id === itemId
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      );
+    });
+  };
+
+  //this provides all the values to components
   const value = {
     user,
     setUser,
@@ -29,26 +68,13 @@ export function AppProvider({ children }) {
     closeCart,
     cartItems,
     addToCart,
+    increaseQuantity, 
+    decreaseQuantity,
   };
 
   return (
     <AppContext.Provider value={value}>
       {children}
-      
-      
-      <ShoppingCartModal isOpen={isCartOpen} onClose={closeCart}>
-        <h3>Your Cart</h3>
-       
-        {cartItems.length > 0 ? (
-          <ul>
-            {cartItems.map(item => (
-              <li key={item.id}>{item.name} - ${item.price}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
-      </ShoppingCartModal>
     </AppContext.Provider>
   );
 }

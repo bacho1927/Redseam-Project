@@ -2,22 +2,23 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  width: 100vw; 
+  height: 100vh; 
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
-  justify-content: flex-end; /* Pushes the modal to the right */
-  align-items: center; /* Vertically centers if the modal wasn't full height */
-  z-index: 1000; /* Ensures the modal is on top of other content */
+  justify-content: flex-end; 
+  align-items: center; 
+  z-index: 1000; 
 }
 
 .shopping-cart-modal {
   background-color: white;
-  width: 30%; /* 30% of the viewport width */
-  height: 100vh; /* 100% of the viewport height */
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow on the left */
+  width: 30%;
+  height: 100vh; 
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); 
   display: flex;
-  flex-direction: column; /* Stacks header, body, footer vertically */
+  flex-direction: column; 
+  justify-content: space-between;
 }
 
 .modal-header {
@@ -47,9 +48,9 @@
 }
 
 .modal-body {
-  flex-grow: 1; /* Allows the body to take up available space */
+  flex-grow: 1; 
   padding: 20px;
-  overflow-y: auto; /* Adds scroll if content overflows */
+  overflow-y: auto; 
 }
 
 .modal-footer {
@@ -80,4 +81,16 @@
 
 .modal-footer .checkout-button:hover {
   background-color: #0056b3;
+}
+
+.cart-item-container{
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.cart-item-image{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
 }

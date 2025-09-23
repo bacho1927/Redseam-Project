@@ -1,20 +1,23 @@
 import { useParams } from 'react-router-dom';
 import { FetchProductById } from '../features/auth/fetch/FetchProductById';
-import { useState,useEffect } from 'react';
+import { useState,useEffect, useContext } from 'react';
 import './ProductDetail.css'
 import { MdOutlineShoppingCart } from "react-icons/md";
-
+import { AppContext } from '../context/AppContext';
 
 function ProductDetail() {
 
-    const { productId } = useParams(); 
+    const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(product?.available_colors?.[0] || '');
+    
+    // states for item selections
+    const [mainImage, setMainImage] = useState('');
+    const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
-    const [mainImage, setMainImage] = useState(product?.cover_image);
     const [quantity, setQuantity] = useState(1);
+    const { addToCart, openCart } = useContext(AppContext);
 
  // this code fetches products by id
    useEffect(() => {
@@ -23,6 +26,13 @@ function ProductDetail() {
         setLoading(true);
         const data = await FetchProductById(productId);
         setProduct(data);
+        
+        // Set initial defaults only after product data is successfully fetched
+        if (data) {
+          setMainImage(data.cover_image);
+          setSelectedColor(data.available_colors?.[0] || '');
+          setSelectedSize(data.available_sizes?.[0] || '');
+        }
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -30,32 +40,32 @@ function ProductDetail() {
         setLoading(false);
       }
     };
-
     loadProduct();
-  }, [productId]); 
+  }, [productId]);
 
-    useEffect(() => {
-    if (product?.available_colors?.length) {
-        setSelectedColor(product.available_colors[0]);
+   const handleAddToCart = () => {
+    
+    if (!product) return;
+
+    const itemToAdd = {
+      ...product, // Copy all original product info
+      id: `${product.id}-${selectedColor}-${selectedSize}`, // Create a unique ID for this specific variant
+      selectedColor: selectedColor,
+      selectedSize: selectedSize,
+      selectedImage: mainImage, 
+      quantity: quantity
+    };
+    
+    addToCart(itemToAdd); // Add the detailed item to the cart
+    openCart();           // Open the cart modal
+  };
+ 
+ const handleThumbnailClick = (image, index) => {
+    setMainImage(image);
+    if (product?.available_colors?.[index]) {
+      setSelectedColor(product.available_colors[index]);
     }
-    }, [product]);
-        
-
-    useEffect(() => {
-  if (product?.available_sizes?.length) {
-    setSelectedSize(product.available_sizes[0]);
-  }
-}, [product]);
-
-// this code is to display main image on initial render
-  useEffect(() => {
-    if (product?.cover_image) {
-      setMainImage(product.cover_image);
-    }
-  }, [product]);
-
-
-console.log(product)
+  };
 
     return (
       <>
@@ -67,7 +77,7 @@ console.log(product)
                 {product?.images?.map((image,index) =>(
                   <img src={image} 
                   key={index}
-                   onClick={() => setMainImage(image)}class="Product-Small-Images"
+                   onClick={() => handleThumbnailClick(image, index)}class="Product-Small-Images"
                    style={{border: mainImage === image ? `1px solid gray` : ''}}/>
                 ))}
                 </div>
@@ -78,9 +88,7 @@ console.log(product)
             <h1>{product?.name}</h1>
             <div className="Product-Detail-Info">
                 <h1 className="Product-Detail-Price">${product?.price}</h1> 
-                
-                
-
+            
                 <p class="Product-Color-Text">{`Color: ${selectedColor}`}</p>
 
                 <div className='Product-Colors-Container'>
@@ -94,9 +102,12 @@ console.log(product)
                         style={{ backgroundColor: color.toLowerCase(),
                             border: selectedColor === color ? '2px solid black' : '1px solid #ccc'
                          }}
-                        onClick={() => setSelectedColor(color)}
-                    >
-                        
+                       onClick={() => {
+                            setSelectedColor(color);
+                            if (product?.images?.[index]) {
+                              setMainImage(product.images[index]);
+                            }
+                          }}>   
                     </span>
                     </>
                 ))}
@@ -129,7 +140,7 @@ console.log(product)
                     ))}
                   </select>
             </div>
-             <button class="Add-To-Cart-Button"><MdOutlineShoppingCart />Add to cart</button>
+             <button onClick={handleAddToCart}class="Add-To-Cart-Button"><MdOutlineShoppingCart />Add to cart</button>
              <div class="Product-Brand-Details-Container">
               <p class='Details-Text'>Details</p>
 
