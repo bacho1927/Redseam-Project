@@ -2,7 +2,7 @@ import './Navbar.css'
 import { useAuth } from '../features/auth/AuthContext';
 import { IoPerson } from "react-icons/io5";
 import { Link } from 'react-router-dom';
-import navBarLogo from '../assets/images/Vector.png'
+import navBarLogo from '../assets/images/HandEye.png'
 import { FaCartShopping,FaAngleDown } from "react-icons/fa6";
 import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
