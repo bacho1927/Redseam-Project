@@ -1,5 +1,5 @@
 import './Products.css'
-import { FaFilter } from "react-icons/fa";
+import { BiSliderAlt } from "react-icons/bi";
 import { FaChevronDown } from "react-icons/fa";
 import { FetchProducts } from '../features/auth/fetch/FetchProducts';
 import { useEffect, useRef, useState } from 'react';
@@ -50,18 +50,38 @@ const handleApplyFilter = (e) => {
     e.preventDefault();
     setMinPrice(minPriceRef.current.value);
     setMaxPrice(maxPriceRef.current.value);
+    setIsFilterOpen(false)
   };
+  const handleClearFilter = () => {
+      setMinPrice('');
+      setMaxPrice('');
+      if(minPriceRef.current) minPriceRef.current.value = '';
+      if(maxPriceRef.current) maxPriceRef.current.value = '';
+  };
+
   
 
     return (
         <div class='Products-Page-Container'>
             <div class='Products-Header-Container'>
+              <div>
                 <h1 >Products</h1>
+                {(minPrice || maxPrice) && (
+                <div className="active-filter-display">
+                    <p>
+                        Price:
+                        {minPrice && ` ${minPrice}-`}
+                        {maxPrice && `${maxPrice}`}
+                    </p>
+                    <button onClick={handleClearFilter} className="clear-filter-button">X</button>
+                </div>
+            )}
+                </div>
                 <form class='Filter-Sort-Container'>
-                  
+                    
                     <div className='Filter'>
                       <div className='Filter-Button' onClick={() => setIsFilterOpen(!isFilterOpen)}>
-                      <FaFilter /><p>Filter</p>
+                      <BiSliderAlt /><span>Filter</span>
                       </div>
                       {isFilterOpen &&
                       
@@ -70,9 +90,8 @@ const handleApplyFilter = (e) => {
                         <div class='Filter-Inputs'>
                               <input
                               type="number"
-                               name="minPrice"
+                              name="minPrice"
                               placeholder="From"
-                              
                               ref={minPriceRef} 
                               className="price-input"
                             />
@@ -81,7 +100,6 @@ const handleApplyFilter = (e) => {
                               type="number"
                               placeholder="To"
                               name="maxPrice"
-                              
                               ref={maxPriceRef}
                               className="price-input"
                             />

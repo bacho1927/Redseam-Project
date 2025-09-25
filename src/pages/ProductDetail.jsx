@@ -9,6 +9,7 @@ function ProductDetail() {
 
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+    
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
@@ -17,7 +18,7 @@ function ProductDetail() {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
     const [quantity, setQuantity] = useState(1);
-    const { addToCart, openCart } = useContext(AppContext);
+    const { addToCart,openCart } = useContext(AppContext);
 
  // this code fetches products by id
    useEffect(() => {
@@ -27,7 +28,7 @@ function ProductDetail() {
         const data = await FetchProductById(productId);
         setProduct(data);
         
-        // Set initial defaults only after product data is successfully fetched
+        // sets initial defaults only after product data is successfully fetched
         if (data) {
           setMainImage(data.cover_image);
           setSelectedColor(data.available_colors?.[0] || '');
@@ -48,17 +49,17 @@ function ProductDetail() {
     if (!product) return;
 
     const itemToAdd = {
-      ...product, // Copy all original product info
-      id: `${product.id}-${selectedColor}-${selectedSize}`, // Create a unique ID for this specific variant
+      ...product, // copies all original product info
+      id: `${product.id}-${selectedColor}-${selectedSize}`, 
       selectedColor: selectedColor,
       selectedSize: selectedSize,
       selectedImage: mainImage, 
       quantity: quantity
     };
     
-    addToCart(itemToAdd); // Add the detailed item to the cart
-    openCart();           // Open the cart modal
-  };
+    addToCart(itemToAdd); // adds the detailed item to the cart
+    openCart();  //opens cart when item is added to cart
+  };  
  
  const handleThumbnailClick = (image, index) => {
     setMainImage(image);
@@ -66,6 +67,19 @@ function ProductDetail() {
       setSelectedColor(product.available_colors[index]);
     }
   };
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+
+
+    //this is to display custom colors, that css dont have access on
+     const getBackgroundColor = (color) => {
+        if (color.toLowerCase() === 'multi') {
+            return 'linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)';
+        }
+        return color.toLowerCase();
+    };
+
 
     return (
       <>
@@ -94,22 +108,25 @@ function ProductDetail() {
                 <div className='Product-Colors-Container'>
 
                 {product?.available_colors?.map((color, index) => (
-                    <>
-                
-                    <span 
-                        key={index} 
-                        className='Product-Color-Box' 
-                        style={{ backgroundColor: color.toLowerCase(),
-                            border: selectedColor === color ? '2px solid black' : '1px solid #ccc'
-                         }}
-                       onClick={() => {
-                            setSelectedColor(color);
-                            if (product?.images?.[index]) {
-                              setMainImage(product.images[index]);
-                            }
-                          }}>   
-                    </span>
-                    </>
+                  <span 
+                    key={index} 
+                    className='Product-Color-Box' 
+                    //this style is to give color box outline
+                   style={{ 
+                      background: getBackgroundColor(color),
+                      border: '1px solid #ccc',  
+                      ...(selectedColor === color && { 
+                          outline: `2px solid ${color}`, 
+                          outlineOffset: '2px' 
+                      })
+                    }}
+                    onClick={() => {
+                      setSelectedColor(color);
+                      if (product?.images?.[index]) {
+                        setMainImage(product.images[index]);
+                      }
+                    }}>
+                  </span>
                 ))}
             </div>
                 <p>{`Size: ${selectedSize}`}</p>

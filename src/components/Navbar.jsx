@@ -11,7 +11,7 @@ import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
   const { user, isLoggedIn } = useAuth();
-const {  openCart } = useContext(AppContext);
+  const {  openCart } = useContext(AppContext);
 
   return (
     <nav class='Navbar-Main'>
