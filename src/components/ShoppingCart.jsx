@@ -1,9 +1,10 @@
 import  { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import './ShoppingCart.css'; 
-
+import cartLogo from '../assets/images/cart-logo.png'
 const ShoppingCart = () => {
-  const { cartItems,increaseQuantity, decreaseQuantity } = useContext(AppContext);
+
+  const { cartItems,increaseQuantity, decreaseQuantity, removeItem,closeCart } = useContext(AppContext);
 
   
   const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -25,11 +26,15 @@ const ShoppingCart = () => {
                    
                     <span>{item.selectedColor}</span>
                     <span>{item.selectedSize}</span>
-                     <div className="quantity-control">
-                    <button class="decrease-button" onClick={() => decreaseQuantity(item.id)}>-</button>
-                    <span>{item.quantity}</span>
-                    <button class="increase-button" onClick={() => increaseQuantity(item.id)}>+</button>
-                  </div>
+                    <div class="quantity-control-container">
+                      <div className="quantity-control">
+                          <button class="decrease-button" onClick={() => decreaseQuantity(item.id)}>-</button>
+                          <span>{item.quantity}</span>
+                          <button class="increase-button" onClick={() => increaseQuantity(item.id)}>+</button>
+                      </div>
+                      <button class="remove-button" onClick={() => removeItem(item.id)}>Remove</button>
+                    </div>
+                  
                 </div>
               </div>
             ))}
@@ -37,7 +42,16 @@ const ShoppingCart = () => {
           
         </>
       ) : (
-        <p className="empty-cart-message">Your cart is empty. 🛒</p>
+        <div class="empty-cart-container">
+              <div class="empty-cart-header">
+                <img src={cartLogo} />
+                <h1>Ooops!</h1>
+                <p>You've got nothing in your cart just yet...</p>
+                <button onClick={closeCart}>Start shopping</button>
+              </div>
+              
+
+        </div>
       )}
     </div>
   );

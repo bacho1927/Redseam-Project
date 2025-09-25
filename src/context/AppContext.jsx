@@ -59,6 +59,11 @@ const increaseQuantity = (itemId) => {
     });
   };
 
+  const removeItem = (itemId) => {
+  setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
+};
+
+
   //this provides all the values to components
   const value = {
     user,
@@ -70,6 +75,7 @@ const increaseQuantity = (itemId) => {
     addToCart,
     increaseQuantity, 
     decreaseQuantity,
+    removeItem,
   };
 
   return (

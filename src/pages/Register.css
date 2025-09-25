@@ -9,44 +9,47 @@ input[type="password"] {
 }
 
 .Register-Main{
-     display: flex;
+  display: flex;
      
 }
 
 .Register-Form-Container{
-    padding: 10rem; 
-    width: 100%;
+  padding: 10rem; 
+  width: 100%;
 }
 
 .Register-Fields-Container{
-    max-width: 500px;   
-    margin-top: 50px;
-    display: flex;
+  max-width: 500px;   
+  margin-top: 50px;
+  display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
 .Register-Button{
-    margin-top:30px;
-    width: 100%; 
-     max-width: 500px;
-     padding: 10px;
-     color:white;
-     background-color: #FF4000;
-     border:none;
-     border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
+  margin-top:30px;
+  width: 100%; 
+  max-width: 500px;
+  padding: 10px;
+  color:white;
+  background-color: #FF4000;
+  border:none;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
 }
-
+.Register-Button:hover{
+  background-color: #d43702;
+  cursor: pointer;
+}
 .Register-Login{
-    text-decoration: none;
-   color:#FF4000;
-   text-align: center;
+  text-decoration: none;
+  color:#FF4000;
+  text-align: center;
 }
 
 .Form-Error-Message{
-    color: red;
-    margin:0
+  color: red;
+  margin:0
 }
 
 .Upload-Label,.Remove-Label{

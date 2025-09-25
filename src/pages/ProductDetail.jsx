@@ -85,7 +85,7 @@ function ProductDetail() {
               
             </div>
             <div className='Product-Description-Info-Container'>
-            <h1>{product?.name}</h1>
+            <h2>{product?.name}</h2>
             <div className="Product-Detail-Info">
                 <h1 className="Product-Detail-Price">${product?.price}</h1> 
             
@@ -142,7 +142,10 @@ function ProductDetail() {
             </div>
              <button onClick={handleAddToCart}class="Add-To-Cart-Button"><MdOutlineShoppingCart />Add to cart</button>
              <div class="Product-Brand-Details-Container">
-              <p class='Details-Text'>Details</p>
+              <div class="Details-brand-logo-container">
+                <p class='Details-Text'>Details</p>
+                <img class="Details-brand-logo" src={product?.brand?.image}/>
+              </div>
 
               <p >Brand:  {product?.brand?.name}</p>
               <p>{product?.description}</p>

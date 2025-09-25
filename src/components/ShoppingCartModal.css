@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column; 
   justify-content: space-between;
+  padding: 15px;
 }
 
 .modal-header {
@@ -27,9 +28,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 600;
 }
 
-.modal-header h2 {
+.modal-header p {
   margin: 0;
   font-size: 1.5em;
 }
@@ -51,6 +53,7 @@
   flex-grow: 1; 
   padding: 20px;
   overflow-y: auto; 
+  max-height: 500px;
 }
 
 .modal-footer {
@@ -59,6 +62,8 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  height:200px;
+  font-size: 20px;
 }
 
 .modal-footer button {
@@ -93,4 +98,29 @@
   height: 100px;
   object-fit: cover;
   border-radius: 4px;
+}
+.modal-footer-texts{
+  display: flex;
+  flex-direction: column;
+  gap:15px
+}
+.modal-footer-prices{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap:15px;
+}
+.modal-checkout-button-container{
+  text-align: center;
+  width: 100%;
+  position: relative;
+  padding: 15px;
+}
+.modal-checkout-button{
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  background-color: #FF4000;
+  color:white;
+  border-radius: 10px;
 }

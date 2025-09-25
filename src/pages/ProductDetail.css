@@ -6,25 +6,33 @@
 }
 .Product-Detail-Main-Image-Container{
     display: flex;
+    width: 50%;
+    height:700px;
 }
 
 .Product-Detail-Main-Image{
-    
     border: 1px solid #ddd; 
-    
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 70%;
-    height: 80%;
+    width: 100%;
     object-fit: contain;
-  
 }
 
 .Product-Description-Info-Container {
-    width: 70%;
-    max-width: 600px;
+    width: 80%;
+    max-width: 750px;
     display: flex;
     flex-direction: column;
-    gap:25px; 
+    gap:10px; 
+    
+}
+.Product-Description-Info-Container h2 {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.Product-Detail-Price{
+    font-weight: 600;
+    font-size: 30px;
 }
 
 .Product-Sizes-Container{
@@ -39,7 +47,7 @@
     padding: 5px;
     border-radius: 8px;
     padding-left: 30px;
-  padding-right: 30px;
+    padding-right: 30px;
   
 }
 
@@ -81,10 +89,11 @@
 }
 
 .Quantity-Selector select {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-   width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+
 }
 
 .Add-To-Cart-Button{
@@ -92,16 +101,16 @@
     font-size: 18px;
     width: 100%;
     padding:1rem;
-     background-color: #FF4000;
-     border: none;
-     color: white;
-     border-radius: 10px;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     gap:5px;
-     font-family: poppins;
-     cursor: pointer;
+    background-color: #FF4000;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+    font-family: poppins;
+    cursor: pointer;
 }
 .Add-To-Cart-Button:hover{
     background-color: #d43702;
@@ -110,10 +119,20 @@
 .Product-Brand-Details-Container{
     display: flex;
     flex-direction: column;
-    gap:20px
+    gap:25px;
+    margin-top: 10px;
 }
 
 .Details-Text{
     font-size:25px;
     font-weight: 500;
+}
+
+.Details-brand-logo-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Details-brand-logo{
+    width: 70px;
 }

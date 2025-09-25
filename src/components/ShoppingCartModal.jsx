@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import './ShoppingCartModal.css';
 
 const ShoppingCartModal = ({ isOpen, onClose, children,itemCount,totalPrice = 0  }) => {
@@ -7,7 +8,7 @@ const ShoppingCartModal = ({ isOpen, onClose, children,itemCount,totalPrice = 0 
     <div className="modal-overlay" onClick={onClose}>
       <div className="shopping-cart-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>Shopping cart({ itemCount})</h2>
+          <p>Shopping cart({ itemCount})</p>
           <button className="close-button" onClick={onClose}>
             &times;
           </button>
@@ -15,13 +16,27 @@ const ShoppingCartModal = ({ isOpen, onClose, children,itemCount,totalPrice = 0 
         <div className="modal-body">
           {children}
         </div>
-        <div className="modal-footer">
-            <div className="footer-total">
-            
-            <strong>Total ${totalPrice.toFixed(2)}</strong>
+        {itemCount && 
+          ( <><div className="modal-footer">
+              <div class="modal-footer-texts">
+                <p>Items subtotal</p>
+                <p>Delivery</p>
+                <strong>Total</strong>
+              </div>
+              
+              <div class="modal-footer-prices">
+                <p>${totalPrice}</p>
+                <p>$5</p>
+                <strong>${totalPrice+5}</strong>
+              </div>
+              
           </div>
-          <button className="checkout-button">Proceed to Checkout</button>
-        </div>
+          <div class="modal-checkout-button-container">
+          <Link class="modal-checkout-button">Go to checkout</Link>
+          </div>
+          </>) 
+        }
+       
       </div>
     </div>
   );
