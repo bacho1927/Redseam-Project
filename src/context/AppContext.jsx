@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 export const AppContext = createContext();
 
@@ -9,6 +9,12 @@ export function AppProvider({ children }) {
 
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
+
+  // logout function
+  const logout = useCallback(() => {
+    setUser(null);
+    setCartItems([]); // Clears the cart for the next user
+  }, []);
   
   //this code adds items to cart
   const addToCart = (productToAdd) => {
@@ -76,6 +82,7 @@ const increaseQuantity = (itemId) => {
     increaseQuantity, 
     decreaseQuantity,
     removeItem,
+    logout,
   };
 
   return (

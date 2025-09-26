@@ -21,11 +21,13 @@
     display: flex; 
     justify-content: space-between;
     align-items: center;
+    
 }
 
 .Navbar-Logo{
     width: 2.5rem;
     margin-top: 10px;
+    
 }
 
 .Navbar-User-Logo{
@@ -49,4 +51,39 @@
 .Navbar-Shopping-Cart:hover{
 color: rgb(63, 62, 62);
 cursor: pointer;
+}
+
+.Avatar-Logout-Container{
+    position: absolute;
+    width: 120px;
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    top:70px;
+    right: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.Avatar-Logout-Button{
+    text-align: center;
+    background-color: #FF4000;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+.Avatar-Logout-Button:hover {
+    background-color: #d43702;
+}
+
+
+.Avatar-Angledown{
+    cursor: pointer;
+}
+.Avatar-Angledown:hover{
+    color:rgb(158, 163, 168)
 }

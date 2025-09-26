@@ -3,6 +3,7 @@ import './Register.css'
 import Photo from '../assets/images/Login-Photo.png'
 import { Link, useNavigate } from 'react-router';
 import { AuthRegister } from '../features/auth/AuthRegister'
+import defaultAvatar from '../assets/images/default-avatar.jpg'
 
 
 const RegisterForm = () => {
@@ -60,7 +61,7 @@ const RegisterForm = () => {
     formData.append('password', form.password);
     formData.append('password_confirmation', form.confirmPassword); 
 
-    // Append avatar 
+    // append avatar 
     if (avatarInputRef.current?.files[0]) {
       formData.append('avatar', avatarInputRef.current.files[0]);
     }
@@ -106,7 +107,7 @@ console.log(formData)
 
       <div class='Register-Fields-Container'>
         <div className='Avatar-Image-Container'>
-          <img src={avatar}  style={{ width: 100, height: 100, borderRadius: '50%' }} />
+          <img src={avatar || defaultAvatar}  style={{ width: 100, height: 100, borderRadius: '50%' }} />
           <label htmlFor="avatarInput" class="Upload-Label">Upload new</label>
           <label onClick={handleRemoveAvatar} class="Remove-Label">Remove</label>
           <input ref={avatarInputRef} type="file" id="avatarInput" name="avatar" accept="image/*" hidden onChange={handleUploadAvatar}></input>

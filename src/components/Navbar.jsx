@@ -4,14 +4,18 @@ import { IoPerson } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import navBarLogo from '../assets/images/HandEye.png'
 import { FaCartShopping,FaAngleDown } from "react-icons/fa6";
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
-
+import defaultAvatar from '../assets/images/default-avatar.jpg'
 
 
 const Navbar = () => {
-  const { user, isLoggedIn } = useAuth();
+  const { user, isLoggedIn,logout } = useAuth();
   const {  openCart } = useContext(AppContext);
+
+  const [logoutModal, setLogoutModal] = useState(false)
+
+  
 
   return (
     <nav class='Navbar-Main'>
@@ -25,8 +29,13 @@ const Navbar = () => {
         <>
         <div class="Navbar-User-Logo-Container">
         <FaCartShopping  class="Navbar-Shopping-Cart" onClick={openCart}/>
-          <img src={user?.user?.avatar} class="Navbar-User-Logo"/>
-          <FaAngleDown />
+          <img src={user?.user?.avatar ||  defaultAvatar} class="Navbar-User-Logo"/>
+          <FaAngleDown onClick={()=> setLogoutModal(!logoutModal)} class="Avatar-Angledown"/>
+                {logoutModal && 
+                        <div class='Avatar-Logout-Container'>
+                                <button onClick={logout} class="Avatar-Logout-Button">Logout</button>
+                        </div>
+                        }
           </div>
         </>
       ) : (

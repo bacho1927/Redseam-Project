@@ -31,10 +31,10 @@ function Login() {
       
       const userData = await AuthLogin(form);
       
-      // Updates  global state with the user data
+      // updates  global state with the user data
       login(userData); 
       
-      //  Navigate to the main page
+      //  navigates to the main page
       navigate('/'); 
       
     } catch (err) {
