@@ -50,7 +50,7 @@ function Login() {
         <h1>Log in</h1>
         <div className='Login-Fields-Container'>
           <input 
-            type='email' // Use type='email' for better validation
+            type='email' 
             name='email' 
             placeholder='Email' 
             className='Login-Fields-Input' 
@@ -58,7 +58,7 @@ function Login() {
             onChange={handleChange} 
           />
           <input 
-            type='password' // Use type='password' to hide characters
+            type='password' 
             name='password' 
             placeholder='Password' 
             className='Login-Fields-Input' 

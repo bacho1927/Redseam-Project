@@ -10,11 +10,13 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
 
-  //filter states
+  //filter and sort states
   const [filteredProducts, setFilteredProducts] = useState([]); 
+  const [sortOrder, setSortOrder] = useState('default');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
   const minPriceRef = useRef(null);
   const maxPriceRef = useRef(null);
 
@@ -35,23 +37,42 @@ function Products() {
 
 
   useEffect(() => {
-    
     let result = products?.data || [];
+
+    
     if (minPrice) {
       result = result.filter(product => product.price >= parseFloat(minPrice));
     }
     if (maxPrice) {
       result = result.filter(product => product.price <= parseFloat(maxPrice));
     }
-    setFilteredProducts(result);
-  }, [minPrice, maxPrice, products]);
 
+    
+    //sorts products
+    const sortedResult = [...result]; 
+    
+    if (sortOrder === 'price-asc') {
+      sortedResult.sort((a, b) => a.price - b.price); 
+    } else if (sortOrder === 'price-desc') {
+      sortedResult.sort((a, b) => b.price - a.price); 
+    } else if (sortOrder === 'release_year') {
+     
+      sortedResult.sort((a, b) => b.release_year - a.release_year);
+      
+    }
+    
+    setFilteredProducts(sortedResult);
+  }, [minPrice, maxPrice, products, sortOrder]);
+
+    //applies filter
 const handleApplyFilter = (e) => {
     e.preventDefault();
     setMinPrice(minPriceRef.current.value);
     setMaxPrice(maxPriceRef.current.value);
     setIsFilterOpen(false)
   };
+
+  //clears filter
   const handleClearFilter = () => {
       setMinPrice('');
       setMaxPrice('');
@@ -59,11 +80,16 @@ const handleApplyFilter = (e) => {
       if(maxPriceRef.current) maxPriceRef.current.value = '';
   };
 
+
+const handleSortChange = (order) => {
+    setSortOrder(order);
+    setIsSortOpen(false);
+  };
   
 
     return (
-        <div class='Products-Page-Container'>
-            <div class='Products-Header-Container'>
+        <div className='Products-Page-Container'>
+            <div className='Products-Header-Container'>
               <div>
                 <h1 >Products</h1>
                 {(minPrice || maxPrice) && (
@@ -77,7 +103,7 @@ const handleApplyFilter = (e) => {
                 </div>
             )}
                 </div>
-                <form class='Filter-Sort-Container'>
+                <form className='Filter-Sort-Container'>
                     
                     <div className='Filter'>
                       <div className='Filter-Button' onClick={() => setIsFilterOpen(!isFilterOpen)}>
@@ -85,9 +111,9 @@ const handleApplyFilter = (e) => {
                       </div>
                       {isFilterOpen &&
                       
-                      <div class="Filter-Inputs-Container">
+                      <div className="Filter-Inputs-Container">
                         <h3>Select price</h3>
-                        <div class='Filter-Inputs'>
+                        <div className='Filter-Inputs'>
                               <input
                               type="number"
                               name="minPrice"
@@ -112,10 +138,24 @@ const handleApplyFilter = (e) => {
                           </div>
                       </div>}
                     </div>
-                    <div class='Sort'>
-                        <p>Sort by</p>
-                        <FaChevronDown />
-                    </div>
+                    <div className='Sort'>
+                    <label onClick={()=> setIsSortOpen(!isSortOpen)} htmlFor="Sort-select" className='Sort-Button'>Sort by <FaChevronDown /></label>
+                    {isSortOpen &&
+                      <div className="Sort-Modal-container">
+                        <strong>Sort by</strong>
+                         <button
+                          onClick={() => handleSortChange('release_year')}
+                        >
+                          New products first
+                        </button>
+                        <button
+                          onClick={() => handleSortChange('price-asc')}
+                        >
+                          Price, Low to High
+                        </button>
+                        <button  onClick={() => handleSortChange('price-desc')}>Price, High to Low</button>
+                      </div>}
+                  </div>
                 </form>
             </div>
           <div className='Product-List-Container'>

@@ -18,21 +18,21 @@ const ShoppingCartModal = ({ isOpen, onClose, children,itemCount,totalPrice = 0 
         </div>
         {itemCount && 
           ( <><div className="modal-footer">
-              <div class="modal-footer-texts">
+              <div className="modal-footer-texts">
                 <p>Items subtotal</p>
                 <p>Delivery</p>
                 <strong>Total</strong>
               </div>
               
-              <div class="modal-footer-prices">
+              <div className="modal-footer-prices">
                 <p>${totalPrice}</p>
                 <p>$5</p>
                 <strong>${totalPrice+5}</strong>
               </div>
               
           </div>
-          <div class="modal-checkout-button-container">
-          <Link class="modal-checkout-button">Go to checkout</Link>
+          <div className="modal-checkout-button-container">
+          <Link className="modal-checkout-button">Go to checkout</Link>
           </div>
           </>) 
         }
