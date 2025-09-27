@@ -32,7 +32,8 @@ const ShoppingCartModal = ({ isOpen, onClose, children,itemCount,totalPrice = 0 
               
           </div>
           <div className="modal-checkout-button-container">
-          <Link className="modal-checkout-button">Go to checkout</Link>
+
+          <Link onClick={onClose} to="/checkout" className="modal-checkout-button">Go to checkout</Link>
           </div>
           </>) 
         }

@@ -9,7 +9,7 @@ import RegisterForm from '../pages/Register';
 import Products from '../pages/Products';
 import ProductDetail from '../pages/ProductDetail';
 import OrderPlaced from '../pages/OrderPlaced';
-
+import CheckoutPage from '../pages/CheckoutPage'
 function AppRoutes() {
   const { isCartOpen, closeCart, cartItems } = useContext(AppContext);
 
@@ -25,12 +25,14 @@ function AppRoutes() {
           <Route path='/register' element={<RegisterForm />} />
           <Route path='/' element={<Products />} />
           <Route path="/products/:productId" element={<ProductDetail />} />
+          <Route path="/checkout" element={<CheckoutPage />}/>
           <Route path='/order-placed' element={<OrderPlaced />} />
         </Routes>
       </Layout>
       
       <ShoppingCartModal isOpen={isCartOpen} onClose={closeCart} itemCount={totalItems} totalPrice={totalPrice} >
         <ShoppingCart />
+        
       </ShoppingCartModal>
     </Router>
   );

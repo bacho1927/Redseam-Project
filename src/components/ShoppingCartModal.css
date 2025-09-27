@@ -123,4 +123,11 @@
   background-color: #FF4000;
   color:white;
   border-radius: 10px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-checkout-button:hover{
+  background-color: #d43702;
 }
