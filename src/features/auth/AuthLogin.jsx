@@ -9,7 +9,7 @@ export const AuthLogin = async (form) => {
       email: form.email,
       password: form.password
     },
-    console.log(form),
+    
     {headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -17,5 +17,6 @@ export const AuthLogin = async (form) => {
       },
     }
   );
+  
   return response.data;
 };

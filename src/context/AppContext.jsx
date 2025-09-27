@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from "react";
+import { useAuth } from "../features/auth/AuthContext";
 
 export const AppContext = createContext();
 
@@ -9,6 +10,8 @@ export function AppProvider({ children }) {
 
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
+  const { AuthUser } = useAuth();
+
 
   // logout function
   const logout = useCallback(() => {
@@ -35,6 +38,55 @@ export function AppProvider({ children }) {
     });
     
   };
+
+  //this code posts all the cart items to api
+
+  const handleCheckout = async () => {
+    
+    if (!AuthUser || !AuthUser.token) {
+      alert("Authentication error: Please log in again.");
+      return;
+    }
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    try {
+      await Promise.all(
+        cartItems.map(async (item) => {
+          const url = `https://api.redseam.redberryinternship.ge/api/cart/products/${item.id}`;
+           
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              
+              'Authorization': `Bearer ${AuthUser.token}`, 
+            },
+           
+            body: JSON.stringify({
+              quantity: item.quantity,
+              color:item.selectedColor,
+              size:item.selectedSize
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`Failed to process item ${item.name}. Status: ${response.status}`);
+          }
+        })
+        
+      );
+
+      closeCart(); 
+
+    } catch (error) {
+      console.error("Checkout failed:", error);
+      alert(`Checkout failed: ${error.message}`);
+    }
+  };
+
 
   //this code is to increase quantity of item in cart
 const increaseQuantity = (itemId) => {
@@ -83,6 +135,7 @@ const increaseQuantity = (itemId) => {
     decreaseQuantity,
     removeItem,
     logout,
+    handleCheckout
   };
 
   return (

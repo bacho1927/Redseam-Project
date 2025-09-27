@@ -11,7 +11,9 @@ import ProductDetail from '../pages/ProductDetail';
 import OrderPlaced from '../pages/OrderPlaced';
 import CheckoutPage from '../pages/CheckoutPage'
 function AppRoutes() {
-  const { isCartOpen, closeCart, cartItems } = useContext(AppContext);
+  const { isCartOpen, closeCart, cartItems} = useContext(AppContext);
+
+  
 
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -32,7 +34,7 @@ function AppRoutes() {
       
       <ShoppingCartModal isOpen={isCartOpen} onClose={closeCart} itemCount={totalItems} totalPrice={totalPrice} >
         <ShoppingCart />
-        
+
       </ShoppingCartModal>
     </Router>
   );

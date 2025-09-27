@@ -50,7 +50,6 @@ function ProductDetail() {
       selectedImage: mainImage,
       quantity,
     };
-
     addToCart(itemToAdd);
     openCart();
   };

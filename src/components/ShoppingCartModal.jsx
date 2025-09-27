@@ -1,7 +1,12 @@
 import { Link } from 'react-router';
 import './ShoppingCartModal.css';
-
+import { AppContext } from '../context/AppContext';
+import { useContext } from 'react';
 const ShoppingCartModal = ({ isOpen, onClose, children,itemCount,totalPrice = 0  }) => {
+
+
+  const { handleCheckout } = useContext(AppContext);
+
   if (!isOpen) return null; 
 
   return (
@@ -33,7 +38,7 @@ const ShoppingCartModal = ({ isOpen, onClose, children,itemCount,totalPrice = 0 
           </div>
           <div className="modal-checkout-button-container">
 
-          <Link onClick={onClose} to="/checkout" className="modal-checkout-button">Go to checkout</Link>
+          <Link onClick={handleCheckout} to="/checkout" className="modal-checkout-button">Go to checkout</Link>
           </div>
           </>) 
         }

@@ -3,7 +3,7 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom'; // Correct the import
 import { AuthLogin } from '../features/auth/AuthLogin';
 import { useState } from 'react';
-import { useAuth } from '../features/auth/AuthContext'; // 1. Import useAuth
+import { useAuth } from '../features/auth/AuthContext'; 
 
 function Login() {
   const [form, setForm] = useState({
@@ -11,8 +11,10 @@ function Login() {
     password: '',
   });
 
+
   const navigate = useNavigate(); 
-  const { login } = useAuth();    // 3. Get the login function from your context
+
+  const { login } = useAuth();   
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +44,8 @@ function Login() {
       alert('Login failed!');
     }
   };
+
+  
 
   return (
     <div className='Login-Main'>
