@@ -7,46 +7,52 @@ import { PostRequest } from "../features/auth/fetch/PostRequest";
 import { useAuth } from "../features/auth/AuthContext";
 
 const CheckoutPage = () => {
-  const { cartItems } = useContext(AppContext);
+  const { cartItems,clearCart } = useContext(AppContext);
   const { AuthUser } = useAuth();
-
-  
+ const [zipError, setZipError] = useState(''); 
+ 
 
   const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
 
   const navigate = useNavigate();
 
   const handlePay = async (e) => {
-
     e.preventDefault();
     const formData = new FormData(e.target);
-
-    const orderItems = cartItems.map(({ id, selectedSize, selectedColor }) => ({ id, selectedSize, selectedColor }));
+    const zipCode = formData.get('zipCode');
 
     
+    const isNumeric = /^\d+$/.test(zipCode); // this  checks if the string contains only digits
 
-    cartItems.map(item => console.log(item))
+    if (!isNumeric) {
+      setZipError("Zip code must only contain numbers.");
+      return; 
+    }
 
+    setZipError(''); 
 
-     const orderPayload = {
-        name: formData.get('firstName'), 
-        surname: formData.get('lastName'),   
-        address: formData.get('address'),
-        zip_code: formData.get('zipCode') ,
-        email:formData.get('email'),
-        item_ids: orderItems.id,
-        color: orderItems.selectedColor,
-        size: orderItems.selectedSize,
-        quantity:2
-        
-  };
-  
+    const orderPayload = {
+      name: formData.get('firstName'),
+      surname: formData.get('lastName'),
+      address: formData.get('address'),
+      zip_code: zipCode, // Use the validated zipCode
+      email: formData.get('email'),
+      items: cartItems.map(item => ({
+        id: item.id,
+        color: item.selectedColor,
+        size: item.selectedSize,
+      })),
+    };
    
     
     try {
       
        const result = await PostRequest('cart/checkout', AuthUser.token, orderPayload);
+
+       ~
+
       console.log('Order successful:', result);
+       clearCart();  
       navigate('/order-placed');
     } catch (err) {
       console.error('Order failed:', err.response?.data || err.message);
@@ -70,13 +76,14 @@ const CheckoutPage = () => {
               <input type="text" id="lastName" name="lastName" placeholder="Surname" required />
             </div>
             <div className="form-field full-width">
-              <input type="email" id="email" name="email" placeholder="Email" required />
+              <input type="email" id="email" name="email" placeholder="Email" required  defaultValue={AuthUser?.user?.email}/>
             </div>
             <div className="form-field">
               <input type="text" id="address" name="address" placeholder="Address" required />
             </div>
             <div className="form-field">
               <input type="text" id="zipCode" name="zipCode" placeholder="Zip code" required />
+               {zipError && <p className="error-message">{zipError}</p>}
             </div>
             
           </div>

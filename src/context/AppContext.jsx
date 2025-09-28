@@ -21,6 +21,7 @@ export function AppProvider({ children }) {
   
   //this code adds items to cart
   const addToCart = (productToAdd) => {
+    
     setCartItems(prevItems => {
 
       //if products matches eachother, only increase quantity 
@@ -61,7 +62,6 @@ export function AppProvider({ children }) {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              
               'Authorization': `Bearer ${AuthUser.token}`, 
             },
            
@@ -78,7 +78,8 @@ export function AppProvider({ children }) {
         })
         
       );
-
+      
+      
       closeCart(); 
 
     } catch (error) {
@@ -121,6 +122,11 @@ const increaseQuantity = (itemId) => {
   setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
 };
 
+  //cleans cart after purchase
+ const clearCart = () => {
+    setCartItems([]);
+  };
+
 
   //this provides all the values to components
   const value = {
@@ -135,7 +141,8 @@ const increaseQuantity = (itemId) => {
     decreaseQuantity,
     removeItem,
     logout,
-    handleCheckout
+    handleCheckout,
+    clearCart
   };
 
   return (

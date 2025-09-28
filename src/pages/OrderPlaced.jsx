@@ -7,7 +7,7 @@ function UserRegistered() {
     return (
         <div className='Ordered-Main-Container'>
             <div className="Ordered-Check-Logo-Background">
-                <IoCheckmarkSharp class="Ordered-Check-Logo"/>
+                <IoCheckmarkSharp className="Ordered-Check-Logo"/>
 
             </div>
             <h1 className="Ordered-Congrats">Congrats!</h1>

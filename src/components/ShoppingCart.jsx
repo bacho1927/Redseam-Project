@@ -4,10 +4,10 @@ import './ShoppingCart.css'; // We'll reuse the same CSS file
 import cartLogo from '../assets/images/cart-logo.png';
 
 const ShoppingCart = ({ isCheckoutPage = false }) => {
-  // Access all the cart data and functions from context
+  // access all the cart data and functions from context
   const { cartItems, increaseQuantity, decreaseQuantity, removeItem, closeCart } = useContext(AppContext);
 
-  // If the cart is empty, show the "Empty Cart" message
+  // if the cart is empty, show the "Empty Cart" message
   if (cartItems.length === 0) {
     return (
       <div className="empty-cart-container">
@@ -15,7 +15,7 @@ const ShoppingCart = ({ isCheckoutPage = false }) => {
           <img src={cartLogo} alt="Cart Logo" />
           <h1>Ooops!</h1>
           <p>You've got nothing in your cart just yet...</p>
-          {/* Only show the 'Start shopping' button if it's not the checkout page */}
+         
           {!isCheckoutPage && (
             <button onClick={closeCart}>Start shopping</button>
           )}
@@ -24,7 +24,7 @@ const ShoppingCart = ({ isCheckoutPage = false }) => {
     );
   }
 
-  // If the cart has items, render the list
+  // if the cart has items, render the list
   return (
     <div className="cart-items-list">
       {cartItems.map(item => (
