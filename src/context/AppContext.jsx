@@ -11,7 +11,7 @@ export function AppProvider({ children }) {
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
   const { AuthUser } = useAuth();
-
+  
 
   // logout function
   const logout = useCallback(() => {
@@ -45,7 +45,7 @@ export function AppProvider({ children }) {
   const handleCheckout = async () => {
     
     if (!AuthUser || !AuthUser.token) {
-      alert("Authentication error: Please log in again.");
+      alert(" Please log in first.");
       return;
     }
     if (cartItems.length === 0) {

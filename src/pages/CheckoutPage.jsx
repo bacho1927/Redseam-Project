@@ -50,7 +50,7 @@ const CheckoutPage = () => {
       
        const result = await PostRequest('cart/checkout', AuthUser.token, orderPayload);
 
-       ~
+      
 
       console.log('Order successful:', result);
        clearCart();  
@@ -59,7 +59,9 @@ const CheckoutPage = () => {
       console.error('Order failed:', err.response?.data || err.message);
     }
   };
-
+ if(!AuthUser.token) {
+        alert('I SAID LOG IN FIRST')
+       }
   return (
     <div className="checkout-page-container">
       <h1>Checkout</h1>
