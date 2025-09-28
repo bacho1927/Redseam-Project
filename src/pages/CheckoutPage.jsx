@@ -35,7 +35,7 @@ const CheckoutPage = () => {
       name: formData.get('firstName'),
       surname: formData.get('lastName'),
       address: formData.get('address'),
-      zip_code: zipCode, // Use the validated zipCode
+      zip_code: zipCode, 
       email: formData.get('email'),
       items: cartItems.map(item => ({
         id: item.id,
