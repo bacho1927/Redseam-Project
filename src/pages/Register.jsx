@@ -66,7 +66,7 @@ const RegisterForm = () => {
       try {
         const result = await AuthRegister(formData);
         console.log('Registration successful:', result);
-        navigate('/');
+        navigate('/login');
       } catch (err) {
         console.error('Registration failed:', err.response?.data || err.message);
       }

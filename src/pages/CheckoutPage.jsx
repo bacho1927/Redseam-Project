@@ -5,6 +5,7 @@ import './CheckoutPage.css';
 import { useNavigate } from "react-router";
 import { PostRequest } from "../features/auth/fetch/PostRequest";
 import { useAuth } from "../features/auth/AuthContext";
+import { AiOutlineMail } from "react-icons/ai";
 
 const CheckoutPage = () => {
   const { cartItems,clearCart } = useContext(AppContext);
@@ -75,7 +76,9 @@ const CheckoutPage = () => {
             <div className="form-field">
               <input type="text" id="lastName" name="lastName" placeholder="Surname" required />
             </div>
-            <div className="form-field full-width">
+            <div className="form-field full-width email-field">
+              <AiOutlineMail className="email-icon"/>
+
               <input type="email" id="email" name="email" placeholder="Email" required  defaultValue={AuthUser?.user?.email}/>
             </div>
             <div className="form-field">

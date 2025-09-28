@@ -102,10 +102,10 @@ input::-webkit-inner-spin-button {
 
 .Product-List-Container{
     display: grid;
-    grid-template-rows: repeat(4, 1fr); /* 4 rows */
-    grid-template-columns: repeat(4, 1fr); /* 3 columns */
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 50px;
-    
+    height: 90rem;
 }
 .Product-Cover {
     

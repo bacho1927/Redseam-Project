@@ -50,15 +50,28 @@
 }
 
 
-.form-field {
+.email-field {
   display: flex;
   flex-direction: column;
+  position: relative;
+
+}
+.email-field.form-field input {
+  padding-left: 40px;
 }
 
 .full-width {
   grid-column: 1 / -1;
 }
-
+.email-icon{
+  position: absolute;
+   top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 20px;
+  pointer-events: none;
+}
 
 .form-field label {
   margin-bottom: 0.5rem;
@@ -134,3 +147,4 @@
 .error-message{
   color: red;
 }
+
